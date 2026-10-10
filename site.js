@@ -70,7 +70,7 @@
       parts.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: 0.7 + Math.pow(Math.random(), 2.5) * 3,  // Particle size
+        r: 0.7 + Math.pow(Math.random(), 2.5) * 7,  // Particle size
         s: 0.12 + Math.random() * 0.3,               // Upward rise speed
         p: Math.random() * 6.28,                     // Wave phase offset
         h: Math.random()                             // Color hue variant
@@ -107,7 +107,7 @@
               ringThickness = 25; // Active impact wave width
 
           if (Math.abs(rd - r.r) < ringThickness && rd > 0) {
-            var pushForce = (1 - Math.abs(rd - r.r) / ringThickness) * r.a * 1.8;
+            var pushForce = (1 - Math.abs(rd - r.r) / ringThickness) * r.a * 5;
             p.x += (rdx / rd) * pushForce;
             p.y += (rdy / rd) * pushForce;
           }
