@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Projects | Michael Lam Huynh's website</title>
+
+
+
+
+
+
 <meta name="description" content="Projects by Michael Lam Huynh: Safe Harbor, a marine habitat forecast for San Diego built at DataHacks 2026, and an AI image detector from SPIS 2025.">
 <meta name="author" content="Michael Lam Huynh">
 <meta name="theme-color" content="#0F4C5C">
@@ -47,8 +53,60 @@
         <h1>Projects</h1>
         <p class="hint">Newest near the surface, older work deeper down.</p>
       </div>
+            <!-- Star Scout Stuff-->
+            <div class="sec">
+        <h2 class="rv"><span class="d">5 m</span>Star Scout</h2>
+        <p class="rv" style="color:var(--muted)">October 2026. Hacktoberfest Hack Day San Diego x SpaceXSI, 6 hours, with Andres Rodriguez.</p>
+        <div class="part rv"><h3>The question</h3>
+          <p>Although space itself is an incredibly popular and well documented aspect of science, there is a certain level of disconnect between those in the scientific community and the average public. So we asked ourselves, is there a way to bridge the gap of astronomical studies while still making it engaging for potential. students to learn from?</p></div>
+        <div class="part rv"><h3>What it does</h3>
+          <p>A large interactive star map with upwards of 8000 different stars logged from the HYG data base. Integration from the Gemma 4 API to allow users to get personalized answers to any questions pertaining to the stars, while also having a kids mode with much simpler explanations. Additionally, the creation of a quest system with predetermined routes that not only provide badges for completion but serve as handpicked constellations to promote learning.</p></div>
+        <div class="rv">
+        <div class="carousel" role="group" aria-roledescription="carousel" aria-label="Star Scout screenshots">
+          <div class="slides" tabindex="0">
+
+            <figure class="slide">
+              <div class="frame"><img src="assets/star-scout-dome.png" alt="View From Earth" loading="lazy"></div>
+              <figcaption>View From Earth</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <div class="frame"><img src="assets/star-scout-panorama.png" alt="Flat Map" loading="lazy"></div>
+              <figcaption>Flat Map</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <div class="frame"><img src="assets/star-scout-search.png" alt="Search Feature" loading="lazy"></div>
+              <figcaption>Search Feature</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <div class="frame"><img src="assets/star-scout-about.png" alt="About Page" loading="lazy"></div>
+              <figcaption>About Page</figcaption>
+            </figure>
+          </div>
+          <button class="cbtn prev" aria-label="Previous screenshot">&#8249;</button>
+          <button class="cbtn next" aria-label="Next screenshot">&#8250;</button>
+          <div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+        <div class="part rv"><h3>How it was built</h3>
+          <p>We used the HYG star catalog of nearly 9000 stars from our galaxy and mapped out each star onto the D3 celestial map. From there we utilized the Gemma 4 API to not only look up information from the data base but also respond to any user questions for every star. Built within the Cursor IDE and Grokbot assistance to streamline development within the timeframe.</p>
+           <ul class="tools"><li>Python</li><li>JavaScript</li><li>CSS</li><li>HTML</li><li>Gemma 4 API</li><li>Cursor IDE</li></ul></div>
+        <div class="part rv"><h3>Limitations</h3>
+          <p>Star Scout was created in only 6 hours of active programming and the scope and depth of the project reflects that.</p>
+          <ul class="plain">
+            <li>The entire website relies on Gemma API, as such has potential to provide misinformation</li>
+            <li>Loading all 9000 stars at once on the map could lead to the website slowing down on less powerful devices</li>
+            <li>The current website has zero mobile integration or thoughts towards user interface</li>
+            <li>A vast majority of the project's infrastructure was generate with AI, as such aspects of Star Scout may be unoptimized</li>
+          </ul>
+        <div class="part rv"><h3>What I learned, and what's next</h3>
+          <p> The goal with Star Scout was to be an easy way for all those interested to learn about space in an easier way. As such with the future, we intend to expand the scope of the project, whether that be adding planets, black holes, or any other interstellar objects. Furthermore, the chance of spreading misinformation is still something that goes against the spirit of Star Scout however since much of the information being provided is from Gemma 4, a possible way to work around this is by having pre-written explanations for common questions for the most popular stars. Another option could be to create our own model that is heavily trained on more space data, however this still has the potential to hallucinate. As a whole, I feel I learned a lot more about how to work under pressure and feel a lot more confident in doing well in my next hackathon or coding project that I will attend in the future.   </p>
+          <p><a href="https://star-scout.netlify.app/">Website</a> &nbsp; <a href="https://github.com/MichaelHuynh28/Star-Scout">GitHub repo</a></p></div>
+      <!-- Safe Harbor Stuff Below-->
       <div class="sec">
-        <h2 class="rv"><span class="d">5 m</span>Safe Harbor</h2>
+        <h2 class="rv"><span class="d">83 m</span>Safe Harbor</h2>
         <p class="rv" style="color:var(--muted)">April 2026. DataHacks 2026, 48 hours, with Andres Rodriguez.</p>
         <div class="part rv"><h3>The question</h3>
           <p>With California sea temperatures rising, where will the animals go? The coast is defined by the creatures that live in it, and warming water is already pushing them around. If we can predict where temperature changes send a species, people can plan for irregular migration instead of reacting to it.</p></div>
@@ -82,9 +140,10 @@
         <div class="part rv"><h3>What was hard</h3>
           <p>The datasets were huge, so shrinking them and cleaning them down to San Diego took real time. We also had to learn Python tools we had never used, then build visualizations and a clean interface for the results.</p></div>
         <div class="part rv"><h3>What I learned, and what's next</h3>
-          <p> The goal with Safe Harbor is to continue to adjust and tweak our model while slowly adding in more variables such as water depth, an increase different species, and ocean acidification. As a whole I feel the time invested reflects the final results. I learned a lot of key fundamentals regarding handling large datasets and as a freshman I believe this was an important learning experience not only for working with data but scaling down ambition with constraints.</p>
+          <p> The goal with Safe Harbor is to continue to adjust and tweak our model while slowly adding in more variables such as water depth, an increaseed varity species, and ocean acidification. As a whole I feel the time invested reflects the final results. I learned a lot of key fundamentals regarding handling large datasets and as a freshman I believe this was an important learning experience not only for working with data but scaling down ambition with constraints.</p>
           <p><a href="https://devpost.com/software/safe-harbor-bcondm">Devpost</a> &nbsp; <a href="https://github.com/MichaelHuynh28/DataHacks_26">GitHub repo</a></p></div>
       </div>
+      <!-- SPIS Stuff-->
       <div class="sec">
         <h2 class="rv"><span class="d">110 m</span>AI Image Detector</h2>
         <p class="rv" style="color:var(--muted)">Summer 2025. SPIS at UCSD, 2 weeks, with Andres Rodriguez.</p>
