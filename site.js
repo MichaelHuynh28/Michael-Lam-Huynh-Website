@@ -118,6 +118,7 @@
           p.y = H + 10;
           p.x = Math.random() * W;
         }
+
       }
 
       // Render glowing particle
@@ -269,35 +270,67 @@
    [5] SCREENSHOTS CAROUSEL & NAVIGATION
    ========================================================================== */
 
-  (function () {
-    var c = document.querySelector('.carousel');
-    if (!c) return;
-    var sl = c.querySelector('.slides'),
-        dots = [].slice.call(c.querySelectorAll('.dots span'));
+    [].slice.call(document.querySelectorAll('.carousel')).forEach(function (c) {
+      var sl = c.querySelector('.slides'),
+          real = [].slice.call(c.querySelectorAll('.slide')),
+          n = real.length,
+          dots = [].slice.call(c.querySelectorAll('.dots span')),
+          behavior = reduce ? 'auto' : 'smooth',
+          timer;
 
-    // Scroll slides left or right
-    function go(d) {
-      sl.scrollBy({ left: d * sl.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
-    }
+      // Put a copy of the last photo before the first, and a copy of the first after the last
+      if (n > 1) {
+        var before = real[n - 1].cloneNode(true),
+            after = real[0].cloneNode(true);
+        [before, after].forEach(function (copy) {
+          copy.setAttribute('aria-hidden', 'true');   // screen readers skip the copies
+          [].slice.call(copy.querySelectorAll('img')).forEach(function (im) { im.loading = 'eager'; });
+        });
+        sl.insertBefore(before, real[0]);
+        sl.appendChild(after);
+      }
 
-    // Prev / Next button listeners
-    c.querySelector('.prev').addEventListener('click', function () { go(-1); });
-    c.querySelector('.next').addEventListener('click', function () { go(1); });
+      // Which slide we're on (counting the copy at the start as 0)
+      function pos() { return Math.round(sl.scrollLeft / sl.clientWidth); }
 
-    // Keyboard arrow keys navigation
-    sl.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
+      // Start on the real first photo (slide 1, just after the copy)
+      function startAtFirst() { if (n > 1) sl.scrollLeft = sl.clientWidth; }
+
+      // Move one photo left or right (it keeps going the same direction at the ends)
+      function go(d) {
+        sl.scrollBy({ left: d * sl.clientWidth, behavior: behavior });
+      }
+
+      c.querySelector('.prev').addEventListener('click', function () { go(-1); });
+      c.querySelector('.next').addEventListener('click', function () { go(1); });
+
+      // Left / right arrow keys
+      sl.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
+      });
+
+      // Update the dots, then once scrolling stops, jump from a copy to the real photo
+      sl.addEventListener('scroll', function () {
+        var p = pos(),
+            i = n > 1 ? ((p - 1) % n + n) % n : p;
+        dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+
+        clearTimeout(timer);
+        if (n > 1) {
+          timer = setTimeout(function () {
+            var q = pos();
+            if (q === 0) sl.scrollLeft = n * sl.clientWidth;        // on the copy of the last -> real last
+            else if (q === n + 1) sl.scrollLeft = sl.clientWidth;   // on the copy of the first -> real first
+          }, 120);
+        }
+      }, { passive: true });
+
+      // Set the starting position, and reset it if the window is resized
+      startAtFirst();
+      addEventListener('load', startAtFirst);
+      addEventListener('resize', startAtFirst);
     });
-
-    // Update active pagination indicator dots on scroll
-    sl.addEventListener('scroll', function () {
-      var i = Math.round(sl.scrollLeft / sl.clientWidth);
-      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
-    }, { passive: true });
-  })();
-
-
 /* ==========================================================================
    [6] INITIAL DIVE-IN INTRO SCREEN & BUBBLES GENERATOR
    ========================================================================== */
